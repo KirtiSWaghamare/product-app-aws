@@ -9,28 +9,22 @@ pipeline {
     }
 
     stages {
-        stage('Check workspace') {
+        stage('Checkout') {
             steps {
-                echo "Workspace: ${env.WORKSPACE}"
-                bat 'dir'
+                echo "Checking out GitHub"
+                checkout scm
             }
         }
 
-        stage('Clean') {
+        stage('Build') {
             steps {
-                bat 'mvn clean'
+                sh 'mvn clean compile'
             }
         }
-
-        stage('Compile') {
+        
+        stage('Package') {
             steps {
-                bat 'mvn compile'
-            }
-        }
-
-        stage('Install') {
-            steps {
-                bat 'mvn install'
+                sh 'mvn package-DskipTests'
             }
         }
     }
