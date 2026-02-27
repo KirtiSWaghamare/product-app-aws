@@ -5,13 +5,19 @@ env:
     AWS_DEFAULT_REGION: "us-east-1"
     IMAGE_REPO_NAME: "product-app"
     IMAGE_TAG: "latest"
-    
+
 phases:
-  pre_build: 
+  install:
+    runtime-versions:
+      java: corretto21
+    commands:
+      - echo "Installing dependencies and verifying environment..."
+      - java -version
+      - chmod +x mvnw  
+  pre_build:
     commands:
       - echo "Running Maven wrapper build..."
-      - chmod +x mvnw
-      - ./mvnw clean install -DskipTests
+      - ./mvnw -B clean install -DskipTests
       - echo "Logging in to Amazon ECR..."
       - aws --version
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
