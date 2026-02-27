@@ -5,7 +5,7 @@ pipeline {
         // Set Java home
         JAVA_HOME = "C:/Program Files/Java/jdk-21.0.10"
         // Add Java and Maven to PATH
-        PATH = "${JAVA_HOME}/bin;C:\apache-maven-3.9.12/bin;${env.PATH}"
+        PATH = "${JAVA_HOME}/bin;C:/apache-maven-3.9.12/bin;${env.PATH}"
     }
 
     stages {
