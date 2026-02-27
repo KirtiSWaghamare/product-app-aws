@@ -1,5 +1,5 @@
 # Use OpenJDK 17 base image
-FROM public.ecr.aws/docker/library/openjdk:17
+FROM public.ecr.aws/docker/library/openjdk:21
 
 # Set working directory
 WORKDIR /app
