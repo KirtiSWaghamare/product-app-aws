@@ -9,8 +9,9 @@ env:
 phases:
   pre_build: 
     commands:
-      - echo "Running Maven build..."
-      - mvn clean install
+      - echo "Running Maven wrapper build..."
+      - chmod +x mvnw
+      - ./mvnw clean install -DskipTests
       - echo "Logging in to Amazon ECR..."
       - aws --version
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
