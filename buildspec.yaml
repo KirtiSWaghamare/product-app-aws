@@ -18,7 +18,9 @@ phases:
   build:
     commands:
       - echo "Build started on $(date)"
-      - echo "Verifying Docker build prerequisites"
+      - echo "Disabling Docker BuildKit"
+      - export DOCKER_BUILDKIT=0
+      - export COMPOSE_DOCKER_CLI_BUILD=0
       - echo "Building the Docker image..."
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
