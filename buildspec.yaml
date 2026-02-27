@@ -17,7 +17,11 @@ phases:
   pre_build:
     commands:
       - echo "Running Maven wrapper build..."
-      - ./mvnw -B clean install -DskipTests
+      - echo "mvnw file information:" && ls -l mvnw
+      - echo "Attempting to run wrapper version check" && ./mvnw -v || echo "wrapper version check failed"
+      - echo "Starting build with debug output"
+      - ./mvnw -B -X clean install -DskipTests > build.log 2>&1 || (cat build.log && exit 1)
+      - echo "Maven wrapper build completed (see build.log)"
       - echo "Logging in to Amazon ECR..."
       - aws --version
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
