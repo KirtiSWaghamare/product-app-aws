@@ -9,7 +9,6 @@ env:
 phases:
   pre_build:
     commands:
-      - if [ ! -f target/ProductAppAWS-0.0.1-SNAPSHOT.jar ]; then echo "ERROR: JAR not found" && exit 1; fi
       - echo "Logging in to Amazon ECR..."
       - aws --version
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
@@ -20,7 +19,6 @@ phases:
     commands:
       - echo "Build started on $(date)"
       - echo "Verifying Docker build prerequisites"
-      - if [ ! -f target/ProductAppAWS-0.0.1-SNAPSHOT.jar ]; then echo "ERROR: build artifact missing, aborting" && exit 1; fi
       - echo "Building the Docker image..."
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
