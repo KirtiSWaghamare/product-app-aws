@@ -1,5 +1,5 @@
 # Build the application using Maven
-FROM aws/docker/library/maven:3.9-amazoncorretto-21 as build
+FROM public.ecr.aws/docker/library/maven:3.9-amazoncorretto-21 AS build
 
 # Set working directory
 WORKDIR /app
