@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Create the minimal runtime image
-FROM amazoncorretto:21-alpine AS runtime
+FROM public.ecr.aws/docker/library/amazoncorretto:21-alpine AS runtime
 WORKDIR /app
 
 # Copy only the built .jar file from the 'built' stage
